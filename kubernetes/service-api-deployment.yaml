@@ -1,0 +1,27 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: service-api-app
+spec:
+  selector:
+    matchLabels:
+      app: service-api-app
+  replicas: 20
+  template:
+    metadata:
+      labels:
+        app: service-api-app
+    spec:
+      containers:
+      - name: node-api-postgres
+        image: "ekregistry.azurecr.io/node-api-postgres:latest"
+        ports:
+        - containerPort: 5001
+        imagePullPolicy: Always
+        env:
+          - name:  "AZURE_SERVICEBUS_CONNECTION_STRING"
+            value: "<your-azure-servicebus-conn-str"
+          - name: "AZURE_SERVICEBUS_QUEUE_NAME"
+            value: "<your-azure-servicebus-queue-name>"
+          - name: "POSTGRES_CONNECTION_STRING"
+            value: "<your-postgres-conn-str>"
