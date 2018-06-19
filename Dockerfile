@@ -15,7 +15,7 @@ RUN npm install --only=production
 COPY . .
 
 # Expose port 5001
-EXPOSE 5001
+EXPOSE 5000
 
 # "npm start" command runs server.js
 CMD [ "npm", "start" ]
